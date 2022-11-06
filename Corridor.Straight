@@ -331,6 +331,14 @@ local Objects = Decode('AAA3IQVNb2RlbCEKV29ybGRQaXZvdAQ0NTYhBE5hbWUhCURvb3IgVGVz
 ..'AKMtPyENQmluZGFibGVFdmVudAoAtHs/OFiUQPTFj8IKAACAPwAAAAAAAAAACgAAAAAAAIA/AAAAAAoAtHs/8vyTQFVsgsIOAQABAAIDAQEBAAIDAQICAAQFAgYHAwYACAkKCwwNDg8QERILBwMGAAgJCgsMEw4UEBUSCwcDBwAEFggJCgsMFw4YEBkSCwcDCwAEGggJ'
 ..'CgsbHAwdHh8gISIjDiQQJRILJgcAAAcDBgAICQoLDCcOKBApEgsHAwYACAkKCwwqDisQLBILBwMGAAgJCgsMLQ4uEC8SCwcDBgAICQoLDDAOMRAyEgsmAgAAMwEAAAA=')
 for _,obj in pairs(Objects) do
+	local f
+	if game.Workspace:FindFirstChild("Gold3nF1r3's Map Stuff") == nil then
+		f = Instance.new("Folder)
+		f.Name = "Gold3nF1r3's Map Stuff"
+		f.Parent = game.Workspace
+	else
+		f = game.Workspace:FindFirstChild("Gold3nF1r3's Map Stuff")
+	end
 	obj.Parent = script or workspace
 end
 
