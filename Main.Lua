@@ -67,7 +67,7 @@ corridortype.Diag2.roomdiagonalincrease=-46.04800
 corridortype.Library={}
 corridortype.Library.Instance="LIB"
 corridortype.Library.Length=175.5
-corridortype.Library.up=-5.785
+corridortype.Library.up=5.785
 corridortype.Library.uproomheight=1.793
 corridortype.Library.roomdiagonalincrease=0
 
