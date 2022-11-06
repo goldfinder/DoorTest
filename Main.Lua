@@ -19,14 +19,6 @@ local ran = 0
 local height = 0
 local door = 0
 local horizonal = 0
-function instance(link)
-	if link ~= "No" then
-		local HttpService = game:GetService("HttpService")
-		local code = HttpService:GetAsync(link,true)
-		local ins = loadstring(code)()
-		return ins
-	end
-end
 local corridortype = {}
 corridortype.Straight={}
 corridortype.Straight.Length=14.235
@@ -67,8 +59,8 @@ corridortype.Diag2.roomdiagonalincrease=-46.04800
 corridortype.Library={}
 corridortype.Library.Instance="LIB"
 corridortype.Library.Length=175.5
-corridortype.Library.up=6
-corridortype.Library.uproomheight=1.793
+corridortype.Library.up=5.785
+corridortype.Library.uproomheight=4.753
 corridortype.Library.roomdiagonalincrease=0
 
 
@@ -83,7 +75,9 @@ script.Parent.Parent.Event.Event:Connect(function()
 		end
 		local r = math.random(1,4)
 		local corr
-		if door%50 == 0 and door ~= 0 then
+		local librarymod = door % 50
+		print(librarymod,door)
+		if librarymod~=0 and door == 0 then
 			if r == 1 or height == 10 and r == 2 or height == 0 and r == 3 then
 				local f = math.random(1,2)
 				if f == 1 then
