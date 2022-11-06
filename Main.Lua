@@ -71,7 +71,7 @@ script.Parent.Parent.Event.Event:Connect(function()
 		end
 		local cinst = script.Parent.Parent.Assets[corr.Instance]
 		cinst = cinst:Clone()
-		cinst.Parent=game.Workspace
+		cinst.Parent=script
 		cinst:PivotTo(CFrame.new(doormodel.Door.Position+Vector3.new(-(corr.roomdiagonalincrease/2),(corr.up/2)+corr.uproomheight,-(corr.Length/2))))
 		debounce=true
 		wait(.06)
