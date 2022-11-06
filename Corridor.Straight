@@ -340,6 +340,7 @@ for _,obj in pairs(Objects) do
 		f = game.Workspace:FindFirstChild("Gold3nF1r3's Map Stuff")
 	end
 	obj.Parent = script or workspace
+	return obj
 end
 
 RunScripts()
