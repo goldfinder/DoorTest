@@ -77,7 +77,9 @@ script.Parent.Parent.Event.Event:Connect(function()
 		local corr
 		local librarymod = door % 50
 		print(librarymod,door)
-		if librarymod~=0 and door == 0 then
+		if librarymod==0 and door == 0 then
+			corr = corridortype.Library
+		else
 			if r == 1 or height == 10 and r == 2 or height == 0 and r == 3 then
 				local f = math.random(1,2)
 				if f == 1 then
@@ -99,8 +101,6 @@ script.Parent.Parent.Event.Event:Connect(function()
 					corr = corridortype.Diag1
 				end
 			end
-		else
-			corr = corridortype.Library
 		end
 		door = door+1
 		local cinst = script.Parent.Parent.Assets[corr.Instance]
