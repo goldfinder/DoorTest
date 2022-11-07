@@ -13,11 +13,6 @@ script.Parent.Touched:Connect(function(hit)
 end)
 end,
 function(script,require)
-script.Parent.ProximityPrompt.TriggerEnded:Connect(function(plr)
-	plr.Character:PivotTo(CFrame.new(65.14, 132.56, -1118.46))
-end)
-end
-}
 local ScriptIndex = 0
 local Scripts,ModuleScripts,ModuleCache = {},{},{}
 local _require = require
