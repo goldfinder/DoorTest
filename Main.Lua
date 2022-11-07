@@ -171,7 +171,8 @@ while true do
 		g.Parent=game.ReplicatedStorage
 		g.Name = "Assets"
 		local f = script.Parent:GetChildren()
-		for i=1,#f do
+				for i=1,#f do
+					wait()
 			if f[i].ClassName == "Model" then
 				f[i].Parent = g
 			end
