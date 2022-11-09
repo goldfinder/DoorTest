@@ -1,5 +1,5 @@
 -- Converted using Mokiros's Model to Script Version 3
--- Converted string size: 22800 characters
+-- Converted string size: 22808 characters
 
 local ScriptFunctions = {
 function(script,require)
@@ -39,6 +39,149 @@ while true do
 end
 end,
 function(script,require)
+local debounce = false
+script.Parent.Door.Door.SurfaceGui.Frame.TextBox.Text="0"
+local doormodel = nil
+local ran = 0
+local height = 0
+local door = 0
+local horizonal = 0
+local corridortype = {}
+corridortype.Straight={}
+corridortype.Straight.Length=14.235
+corridortype.Straight.up=0
+corridortype.Straight.Instance="Straight"
+corridortype.Straight.uproomheight=0
+corridortype.Straight.roomdiagonalincrease=0
+corridortype.Up={}
+corridortype.Up.Length=28.93
+corridortype.Up.Instance="Up"
+corridortype.Up.up=11.192
+corridortype.Up.uproomheight=0
+corridortype.Up.roomdiagonalincrease=0
+corridortype.Down={}
+corridortype.Down.Length=28.93
+corridortype.Down.Instance="Down"
+corridortype.Down.up=-11.192
+corridortype.Down.uproomheight=0
+corridortype.Down.roomdiagonalincrease=0
+corridortype.StraightAlt1={}
+corridortype.StraightAlt1.Instance="Straight-1"
+corridortype.StraightAlt1.Length=29.21
+corridortype.StraightAlt1.up=0
+corridortype.StraightAlt1.uproomheight=1.889
+corridortype.StraightAlt1.roomdiagonalincrease=0
+corridortype.Diag1={}
+corridortype.Diag1.Instance="Diagonal-1"
+corridortype.Diag1.Length=29.21
+corridortype.Diag1.up=0
+corridortype.Diag1.uproomheight=1.889
+corridortype.Diag1.roomdiagonalincrease=46.04800
+corridortype.Diag2={}
+corridortype.Diag2.Instance="Diagonal-2"
+corridortype.Diag2.Length=29.21
+corridortype.Diag2.up=0
+corridortype.Diag2.uproomheight=1.889
+corridortype.Diag2.roomdiagonalincrease=-46.04800
+corridortype.Library={}
+corridortype.Library.Instance="LIB"
+corridortype.Library.Length=175.5
+corridortype.Library.up=5.785
+corridortype.Library.uproomheight=4.753
+corridortype.Library.roomdiagonalincrease=0
+
+
+script.Parent.Parent.Event.Event:Connect(function()
+	ran = ran+1
+	if debounce == false and ran == 1 then
+		if doormodel == nil then
+			doormodel = script.Parent:FindFirstChildOfClass("Model")
+			if doormodel ~= nil then
+				print("Door Model Created")
+			end
+		end
+		local r = math.random(1,4)
+		local corr
+		local librarymod = door % 50
+		print(librarymod,door)
+		if librarymod==0 and door ~= 0 then
+			corr = corridortype.Library
+		else
+			if r == 1 or height == 10 and r == 2 or height == 0 and r == 3 then
+				local f = math.random(1,2)
+				if f == 1 then
+					corr = corridortype.Straight
+				else
+					corr = corridortype.StraightAlt1
+				end
+			elseif r == 2 then
+				corr = corridortype.Up
+				height = height+1
+			elseif r == 3 then
+				corr = corridortype.Down
+				height = height-1
+			elseif r == 4 then
+				local f = math.random(1,2)
+				if f == 1 then
+					corr = corridortype.Diag2
+				else
+					corr = corridortype.Diag1
+				end
+			end
+		end
+		if door == 1000 and door ~= "No more doors :(" then
+			local cinst = game.ReplicatedStorage:FindFirstChild("Assets")[corr.Instance]
+			cinst = cinst:Clone()
+			if cinst.Name=="LIB" then
+				cinst.Arch.Textbox.SurfaceGui.Frame.TextBox.Text=door
+				if door~=1000 then
+					cinst["20"]:Destroy()
+				end
+			end
+			cinst.Parent=script
+			cinst:PivotTo(CFrame.new(doormodel.Door.Position+Vector3.new(-(corr.roomdiagonalincrease/2),(corr.up/2)+corr.uproomheight,-(corr.Length/2))))
+			debounce=true
+			wait(.06)
+			local i = doormodel:Clone()
+			local i = game.ReplicatedStorage:FindFirstChild("Assets")["DFrame"]:Clone()
+			i.SP.Sound:Play()
+			doormodel:PivotTo(CFrame.new(doormodel.Door.Position+Vector3.new(-(corr.roomdiagonalincrease),corr.up,-corr.Length)))
+			door = "No more doors :("
+			script.Parent.Door.Door.SurfaceGui.Frame.TextBox.Text=door
+			i.Parent=script
+			wait(.06)
+			debounce=false
+		elseif door ~= "No more doors :(" then
+			local cinst = game.ReplicatedStorage:FindFirstChild("Assets")[corr.Instance]
+			cinst = cinst:Clone()
+			if cinst.Name=="LIB" then
+				cinst.Arch.Textbox.SurfaceGui.Frame.TextBox.Text=door
+				if door~=1000 then
+					cinst["20"]:Destroy()
+				end
+			end
+			local c = true
+			door = door+1
+			cinst.Parent=script
+			cinst:PivotTo(CFrame.new(doormodel.Door.Position+Vector3.new(-(corr.roomdiagonalincrease/2),(corr.up/2)+corr.uproomheight,-(corr.Length/2))))
+			debounce=true
+			wait(.06)
+			local i = game.ReplicatedStorage:FindFirstChild("Assets")["DFrame"]:Clone()
+			i.SP.Sound:Play()
+			doormodel:PivotTo(CFrame.new(doormodel.Door.Position+Vector3.new(-(corr.roomdiagonalincrease),corr.up,-corr.Length)))
+			script.Parent.Door.Door.SurfaceGui.Frame.TextBox.Text=door
+			i.Parent=script
+			wait(.06)
+			debounce=false
+		end
+	end
+end)
+while true do
+	wait(.9)
+	ran = 0
+end
+end,
+function(script,require)
 script.Parent.ProximityPrompt.TriggerEnded:Connect(function(plr)
 	plr.Character:PivotTo(CFrame.new(65.14, 132.56, -1118.46))
 end)
@@ -74,8 +217,6 @@ function RunScripts()
 		end)()
 	end
 end
-
-
 
 local function DecodeUnion(Values,Flags,Parse,data)
 	local m = Instance.new("Folder")
@@ -412,7 +553,7 @@ local Objects = Decode('AFCQAiEFTW9kZWwhCldvcmxkUGl2b3QEZwJoAmkCBGoCaAJpAgRrAmgC
 ..'9UKWgYnECq5+Z0I8WfVC6xOQxAoDBa5DiRb1Qqa9i8QK02CQQywvAENkv4zECv3/fz8AAAAAAAAAAAr//38/AAAAAAAAAAAKBbafQx0p+UL1uY7ECgAAgL8AAAAALr27swoAAIC/Lr27s+2tCSgKLr27swAAgD8uvbuzCgAAgD8AAAAALr07tAr1v4pDnGwAQ2+2jMQK'
 ..'SuxjQ/hn+ULaGpHECuKJZEPWb/lC0DOMxArSomRDYGT5QqMBjsQKAACAvwAAAAAuvbszCuJ6ZENtavlC/WWKxAp3k6RDfj8DQ17PfMQKAACAvwAAAAAAAAAACgAAgL8uvbsz7a0JKAouvbszAACAPy69uzMKAACAPwAAAAAuvbuzCseLpEM9ngNDizaHxAouvTuzAACA'
 ..'Py69u7MKAACAPy69OzPtrYmnCi69O7MAAIA/AAAAAAoAAIC/Lr07swAAAAAKx4ukQz2eA0OLtoTECseLpEM9ngNDizaCxArHi6RDPZ4DQxZtf8QKx4ukQz2eA0MWbXrECseLpEM9ngNDFm11xAo7laRD9yAGQy/PhMQKAACAPy69OzPtrQmnCi69O7MAAIA/Lr07swoA'
-..'AIA/Lr27M1ocjicKCG8NQzxZ9UKZ64rELQEBAAAAAQACAAMAAQABAAEAAgAEAAEAAgABAAIABQABAAMAAQACAAYAAQAEAAIABwAIAAIACQAKAAUACgAHAAgACwAMAA0ADgAPABAAEQASABMAFAAVABYAFwAYABkAGgAbAA4AHAAGAAUAHQAeAB8ADAAgACEAIgAeACMA'
+..'AIA/Lr27M1ocjicKCG8NQzxZ9UKZ64rELgEBAAAAAQACAAMAAQABAAEAAgAEAAEAAgABAAIABQABAAMAAQACAAYAAQAEAAIABwAIAAIACQAKAAUACgAHAAgACwAMAA0ADgAPABAAEQASABMAFAAVABYAFwAYABkAGgAbAA4AHAAGAAUAHQAeAB8ADAAgACEAIgAeACMA'
 ..'HgAkAAcABAAlACYAJwAeABcAKAAZACkAKgAIAAgAJQAmACcAHgAZACsALAAtAC4AJgAvADAAMQAmADIAMwAKAAUADAAHADQACwAMAA0ADgAPADUAEQA2ADcAOAATADkAFQA6ABcAOwAZADwAGwAOAD0AHgA+AAoAAAAKAAUACAALAAwADQAOAA8APwARAEAAEwBBABcA'
 ..'QgAZAEMAGwAOAAoABQAIAAsADAANAA4ADwA/ABEARAATAEEAFwBFABkARgAbAA4ACgAFAAgACwAMAA0ADgAPAD8AEQBHABMAQQAXAEgAGQBJABsADgAKAAUACQAHAEoACwAMAA0ADgAPAD8AEQBLABMAQQAXAEwAGQBNABsADgBOAAQAAQAHAE8AAQAQAAIABwBQAAIA'
 ..'UQAKABEABgALAAwADQAOABEAUgAXAFMAGQBUABsADgAKABEABgALAAwADQAOABEAVQAXAFYAGQBXABsADgAKABEABgALAAwADQAOABEAWAAXAFkAGQBXABsADgAKABEABgALAAwADQAOABEAWgAXAFsAGQBcABsADgAKABEACwAHAF0ACwAMAA0ADgAPAD8AEQBeADcA'
@@ -480,7 +621,8 @@ local Objects = Decode('AFCQAiEFTW9kZWwhCldvcmxkUGl2b3QEZwJoAmkCBGoCaAJpAgRrAmgC
 ..'ARkAjwEbAA4ACgAWAQoACwAMAA0ADgAPAIQBEQBDAhMAhgEVAIcBFwBEAhkAiQEbAA4AigEhAAoAFgEKAAsADAANAA4ADwCSAREARQITAJQBFQCVARcARgIZAJcBGwAOAIoBIQCYARoBAgATAJQBIAAOAAoAFgELAAsADAANAA4ADwCSAREARwITAJQBFQCVAZ4AqAEX'
 ..'AEgCoQCoARkAmwEbAA4AmAEcAQIAEwCUASAADgAKABYBCgALAAwADQAOAA8AkgERAD8CEwCUARUAlQEXAEACGQCXARsADgCKASEAmAEeAQIAEwCUASAADgABAHAAAgAHAEkCAgBKAgoAIAEKAAcASwILAAwADQAOAA8AkgERAEwCEwCUARUAOgAXAE0CGQBOAhsADgA+'
 ..'ABAAAAABABAAAgAHAE8CAgBQAgoAIwEIAAsADAANAA4ADwA/ABEAUQITAEEAFwBSAhkAQwAbAA4ACgAjAQgACwAMAA0ADgAPAD8AEQBTAhMAQQAXAFQCGQBGABsADgAKACMBCAALAAwADQAOAA8APwARAFUCEwBBABcAVgIZAEkAGwAOAAoAIwEJAAcASgALAAwADQAO'
-..'AA8APwARAFcCEwBBABcAWAIZAE0AGwAOAFkCJwEBAFoCWwJcAgMAAAAKAAEACQALAAwADQAOAA8AmgARAF0CEwCcABUAOgAXAF4CGQBfAhsADgAKAAEACgALAAwADQAOAA8AmgARAGACNwA4ABMAnAAVADoAFwBhAhkAYgIbAA4AYwIrAQIAZAJlAmYCOAA+ACsBAAAA')
+..'AA8APwARAFcCEwBBABcAWAIZAE0AGwAOAFkCJwEBAFoCWwI+AAQAAABcAgMAAAAKAAEACQALAAwADQAOAA8AmgARAF0CEwCcABUAOgAXAF4CGQBfAhsADgAKAAEACgALAAwADQAOAA8AmgARAGACNwA4ABMAnAAVADoAFwBhAhkAYgIbAA4AYwIsAQIAZAJlAmYCOAA+'
+..'ACwBAAAA')
 for _,obj in pairs(Objects) do
 	obj.Parent = script or workspace
 end
