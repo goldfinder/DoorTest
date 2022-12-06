@@ -91,6 +91,7 @@ corridortype.Library.Length=175.5
 corridortype.Library.up=5.785
 corridortype.Library.uproomheight=4.753
 corridortype.Library.roomdiagonalincrease=0
+corridortype.Library.roomdiagonalposition=0
 corridortype.Interactive={}
 corridortype.Interactive.Instance="INT"
 corridortype.Interactive.Length=65.52
